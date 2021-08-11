@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  api_test:
+    build: .
+    command: gunicorn -b localhost:5000 -w 1 api:app
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    user: "${UID}:${GID}"
