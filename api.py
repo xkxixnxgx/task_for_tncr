@@ -1,11 +1,13 @@
 import os
 import json
 from openpyxl import load_workbook
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_restful import reqparse, abort, Resource, Api
+from flasgger import Swagger
 
 app = Flask(__name__)
 api = Api(app)
+swagger = Swagger(app)
 path_dir = os.getcwd()
 
 def abort_if_param_doesnt_exist(dict_from_json, id, type_field):
@@ -62,6 +64,30 @@ parser.add_argument('name', type=str)
 
 class GetData(Resource):
     def get(self, id, type_field):
+        """
+       This examples uses FlaskRESTful Resource
+       It works also with swag_from, schemas and spec_dict
+       ---
+       parameters:
+         - in: path
+           name: username
+           type: string
+           required: true
+       responses:
+         200:
+           description: A single user item
+           schema:
+             id: test
+             properties:
+                id:
+                    type: string
+                    description: Id
+                    default: 1n
+                type:
+                    type: string
+                    description: Type
+                    default: тип5
+        """
         dict_from_json = read_json(id, type_field)
         abort_if_param_doesnt_exist(dict_from_json, id, type_field)
         results_list = adding_data_from_xlsx(dict_from_json)

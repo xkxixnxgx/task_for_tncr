@@ -1,6 +1,10 @@
 # Test task TNCR.
 ## Description
 #### API service for getting and changing data files.
+#### Swagger
+```
+http://127.0.0.1:5000/apidocs/
+```
 ## Stack
 #### Flask, flask-restful, swagger, docker, gunicorn.
 ## Bootstrap
